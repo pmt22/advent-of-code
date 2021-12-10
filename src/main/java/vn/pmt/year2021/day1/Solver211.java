@@ -54,11 +54,8 @@ public class Solver211 extends AbstractPuzzleSolver<Input211, Result211> {
     @Override
     protected Result211 proposeSolutionPart2(Input211 parsedInput) {
         var result = new Result211();
-        for (int i = 0; i < parsedInput.depths.size() - 3; i++) {
-            var firstSlidingWindow = parsedInput.depths.get(i) + parsedInput.depths.get(i + 1) + parsedInput.depths.get(i + 2);
-            var secondSlidingWindow = parsedInput.depths.get(i + 1) + parsedInput.depths.get(i + 2) + parsedInput.depths.get(i + 3);
-
-            if (secondSlidingWindow > firstSlidingWindow) {
+        for (int i = 3; i < parsedInput.depths.size(); i++) {
+            if (parsedInput.depths.get(i) > parsedInput.depths.get(i - 3)) {
                 result.count++;
             }
         }
