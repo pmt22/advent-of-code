@@ -11,7 +11,11 @@ public class Log {
     }
 
     public static void error(String message, Exception e) {
-        System.err.println(message);
+        error(message);
         e.printStackTrace();
+    }
+
+    public static void error(String message) {
+        System.err.println(message);
     }
 }
