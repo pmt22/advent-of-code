@@ -20,6 +20,7 @@ public abstract class AbstractPuzzleSolver<I extends PuzzleInput, R extends Puzz
     protected abstract int day();
     protected abstract I parseInput(List<String> rawInput);
     protected abstract boolean testPart1(R result);
+    protected abstract boolean testPart2(R result);
     protected abstract void displayResult(R result);
 
     @Override
@@ -48,11 +49,23 @@ public abstract class AbstractPuzzleSolver<I extends PuzzleInput, R extends Puzz
 
     private void part2() {
         Log.info("----------Part 2----------");
-
+        I parsedTestInput = parseInput(rawTestInput);
+        R testResult = proposeSolutionPart2(parsedTestInput);
+        displayResult(testResult);
+        if (testPart2(testResult)) {
+            I parsedInput = parseInput(rawActualInput);
+            R result = proposeSolutionPart2(parsedInput);
+            displayResult(result);
+        }
     }
 
     protected R proposeSolutionPart1(I parsedInput) {
         Log.error("Solution for part 1 is not yet implemented!");
+        return null;
+    }
+
+    protected R proposeSolutionPart2(I parsedInput) {
+        Log.error("Solution for part 2 is not yet implemented!");
         return null;
     }
 }

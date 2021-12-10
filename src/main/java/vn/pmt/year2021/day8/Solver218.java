@@ -40,6 +40,11 @@ public class Solver218 extends AbstractPuzzleSolver<Input218, Result218> {
     }
 
     @Override
+    protected boolean testPart2(Result218 result) {
+        return false;
+    }
+
+    @Override
     protected void displayResult(Result218 result) {
 
     }
