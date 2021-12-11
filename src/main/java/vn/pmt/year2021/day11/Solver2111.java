@@ -1,8 +1,5 @@
 package vn.pmt.year2021.day11;
 
-import static vn.pmt.year2021.day11.Solver2111.Input;
-import static vn.pmt.year2021.day11.Solver2111.Result;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -18,7 +15,7 @@ import vn.pmt.common.puzzle.Puzzle;
  * @since 10/12/2021
  */
 @Puzzle(year = 2021, day = 11)
-public class Solver2111 extends AbstractPuzzleSolver<Input, Result> {
+public class Solver2111 extends AbstractPuzzleSolver<Solver2111.Input, Solver2111.Result> {
     private static final int STEPS = 100;
     private static final int MAX_COL = 10;
     private static final int MAX_ROW = 10;
