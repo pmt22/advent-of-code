@@ -3,7 +3,6 @@ package vn.pmt.common.puzzle;
 import java.util.List;
 
 import vn.pmt.common.Importer;
-import vn.pmt.common.Log;
 import vn.pmt.common.PuzzleInput;
 import vn.pmt.common.PuzzleResult;
 
@@ -36,7 +35,7 @@ public abstract class AbstractPuzzleSolver<I extends PuzzleInput, R extends Puzz
     }
 
     private void part1() {
-        Log.info("----------Part 1----------");
+        System.out.println("----------Part 1----------");
         I parsedTestInput = parseInput(rawTestInput);
         R testResult = proposeSolutionPart1(parsedTestInput);
         displayResult(testResult);
@@ -48,7 +47,7 @@ public abstract class AbstractPuzzleSolver<I extends PuzzleInput, R extends Puzz
     }
 
     private void part2() {
-        Log.info("----------Part 2----------");
+        System.out.println("----------Part 2----------");
         I parsedTestInput = parseInput(rawTestInput);
         R testResult = proposeSolutionPart2(parsedTestInput);
         displayResult(testResult);
@@ -60,12 +59,12 @@ public abstract class AbstractPuzzleSolver<I extends PuzzleInput, R extends Puzz
     }
 
     protected R proposeSolutionPart1(I parsedInput) {
-        Log.error("Solution for part 1 is not yet implemented!");
+        System.err.println("Solution for part 1 is not yet implemented!");
         return null;
     }
 
     protected R proposeSolutionPart2(I parsedInput) {
-        Log.error("Solution for part 2 is not yet implemented!");
+        System.err.println("Solution for part 2 is not yet implemented!");
         return null;
     }
 }

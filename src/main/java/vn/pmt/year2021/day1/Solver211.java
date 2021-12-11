@@ -6,7 +6,6 @@ import static vn.pmt.year2021.day1.Solver211.YEAR;
 import java.util.ArrayList;
 import java.util.List;
 
-import vn.pmt.common.Log;
 import vn.pmt.common.PuzzleInput;
 import vn.pmt.common.PuzzleResult;
 import vn.pmt.common.puzzle.AbstractPuzzleSolver;
@@ -72,7 +71,7 @@ public class Solver211 extends AbstractPuzzleSolver<Solver211.Input211, Solver21
 
     @Override
     protected void displayResult(Result211 result) {
-        Log.info("Result: " + result.count);
+        System.out.println("Result: " + result.count);
     }
 
     static class Input211 implements PuzzleInput {

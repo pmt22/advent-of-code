@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.util.Optional;
 
 import com.google.common.reflect.ClassPath;
-import vn.pmt.common.Log;
 import vn.pmt.common.puzzle.Puzzle;
 import vn.pmt.common.puzzle.Solver;
 
@@ -23,7 +22,7 @@ public class AdventOfCodeApplication {
         if (solver.isPresent()) {
             solver.get().solve();
         } else {
-            Log.info("Cannot find the Solver!!!");
+            System.err.println("Cannot find the Solver!!!");
         }
     }
 
@@ -45,7 +44,8 @@ public class AdventOfCodeApplication {
                 try {
                     return ((Solver) clazz.getDeclaredConstructor().newInstance());
                 } catch (Exception e) {
-                    Log.error("Exception when instantiating a PuzzleSolver", e);
+                    System.err.println("Exception when instantiating a PuzzleSolver");
+                    e.printStackTrace();
                     return null;
                 }
             });
