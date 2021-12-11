@@ -3,9 +3,12 @@ package vn.pmt.year2021.day1;
 import static vn.pmt.year2021.day1.Solver211.DAY;
 import static vn.pmt.year2021.day1.Solver211.YEAR;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import vn.pmt.common.Log;
+import vn.pmt.common.PuzzleInput;
+import vn.pmt.common.PuzzleResult;
 import vn.pmt.common.puzzle.AbstractPuzzleSolver;
 import vn.pmt.common.puzzle.Puzzle;
 
@@ -14,7 +17,7 @@ import vn.pmt.common.puzzle.Puzzle;
  * @since 08/12/2021
  */
 @Puzzle(year = YEAR, day = DAY)
-public class Solver211 extends AbstractPuzzleSolver<Input211, Result211> {
+public class Solver211 extends AbstractPuzzleSolver<Solver211.Input211, Solver211.Result211> {
     public static final int YEAR = 2021;
     public static final int DAY = 1;
 
@@ -70,5 +73,13 @@ public class Solver211 extends AbstractPuzzleSolver<Input211, Result211> {
     @Override
     protected void displayResult(Result211 result) {
         Log.info("Result: " + result.count);
+    }
+
+    static class Input211 implements PuzzleInput {
+        List<Integer> depths = new ArrayList<>();
+    }
+
+    static class Result211 implements PuzzleResult {
+        int count;
     }
 }

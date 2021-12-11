@@ -4,6 +4,8 @@ import static vn.pmt.year2021.day11.Solver2111.*;
 
 import java.util.List;
 
+import vn.pmt.common.PuzzleInput;
+import vn.pmt.common.PuzzleResult;
 import vn.pmt.common.puzzle.AbstractPuzzleSolver;
 import vn.pmt.common.puzzle.Puzzle;
 
@@ -12,7 +14,7 @@ import vn.pmt.common.puzzle.Puzzle;
  * @since 10/12/2021
  */
 @Puzzle(year = YEAR, day = DAY)
-public class Solver2111 extends AbstractPuzzleSolver<Input2111, Result2111> {
+public class Solver2111 extends AbstractPuzzleSolver<Solver2111.Input2111, Solver2111.Result2111> {
     public static final int YEAR = 2021;
     public static final int DAY = 11;
 
@@ -54,5 +56,11 @@ public class Solver2111 extends AbstractPuzzleSolver<Input2111, Result2111> {
     @Override
     protected void displayResult(Result2111 result) {
 
+    }
+
+    static class Input2111 implements PuzzleInput {
+    }
+
+    static class Result2111 implements PuzzleResult {
     }
 }
