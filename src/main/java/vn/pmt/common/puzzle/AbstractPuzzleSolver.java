@@ -17,7 +17,7 @@ public abstract class AbstractPuzzleSolver<I extends PuzzleInput, R extends Puzz
 
     protected abstract int year();
     protected abstract int day();
-    protected abstract I parseInput(List<String> rawInput);
+    protected abstract I parseInput(List<String> lines);
     protected abstract boolean testPart1(R result);
     protected abstract boolean testPart2(R result);
     protected abstract void displayResult(R result);
@@ -38,10 +38,12 @@ public abstract class AbstractPuzzleSolver<I extends PuzzleInput, R extends Puzz
         System.out.println("----------Part 1----------");
         I parsedTestInput = parseInput(rawTestInput);
         R testResult = proposeSolutionPart1(parsedTestInput);
+        System.out.print("Test: ");
         displayResult(testResult);
         if (testPart1(testResult)) {
             I parsedInput = parseInput(rawActualInput);
             R result = proposeSolutionPart1(parsedInput);
+            System.out.print("Actual: ");
             displayResult(result);
         }
     }
@@ -50,20 +52,22 @@ public abstract class AbstractPuzzleSolver<I extends PuzzleInput, R extends Puzz
         System.out.println("----------Part 2----------");
         I parsedTestInput = parseInput(rawTestInput);
         R testResult = proposeSolutionPart2(parsedTestInput);
+        System.out.print("Test: ");
         displayResult(testResult);
         if (testPart2(testResult)) {
             I parsedInput = parseInput(rawActualInput);
             R result = proposeSolutionPart2(parsedInput);
+            System.out.print("Actual: ");
             displayResult(result);
         }
     }
 
-    protected R proposeSolutionPart1(I parsedInput) {
+    protected R proposeSolutionPart1(I input) {
         System.err.println("Solution for part 1 is not yet implemented!");
         return null;
     }
 
-    protected R proposeSolutionPart2(I parsedInput) {
+    protected R proposeSolutionPart2(I input) {
         System.err.println("Solution for part 2 is not yet implemented!");
         return null;
     }

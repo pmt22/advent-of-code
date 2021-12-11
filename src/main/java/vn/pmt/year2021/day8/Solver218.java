@@ -1,8 +1,5 @@
 package vn.pmt.year2021.day8;
 
-import static vn.pmt.year2021.day8.Solver218.DAY;
-import static vn.pmt.year2021.day8.Solver218.YEAR;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,46 +12,44 @@ import vn.pmt.common.puzzle.Puzzle;
  * @author Mai Thiên Phú
  * @since 08/12/2021
  */
-@Puzzle(year = YEAR, day = DAY)
-public class Solver218 extends AbstractPuzzleSolver<Solver218.Input218, Solver218.Result218> {
-    public static final int YEAR = 2021;
-    public static final int DAY = 8;
+@Puzzle(year = 2021, day = 8)
+public class Solver218 extends AbstractPuzzleSolver<Solver218.Input, Solver218.Result> {
 
     @Override
     protected int year() {
-        return YEAR;
+        return 2021;
     }
 
     @Override
     protected int day() {
-        return DAY;
+        return 8;
     }
 
     @Override
-    protected Input218 parseInput(List<String> rawInput) {
+    protected Input parseInput(List<String> rawInput) {
         return null;
     }
 
     @Override
-    protected boolean testPart1(Result218 result) {
+    protected boolean testPart1(Result result) {
         return false;
     }
 
     @Override
-    protected boolean testPart2(Result218 result) {
+    protected boolean testPart2(Result result) {
         return false;
     }
 
     @Override
-    protected void displayResult(Result218 result) {
+    protected void displayResult(Result result) {
 
     }
 
-    static class Input218 implements PuzzleInput {
+    static class Input implements PuzzleInput {
         List<Integer> depths = new ArrayList<>();
     }
 
-    static class Result218 implements PuzzleResult {
+    static class Result implements PuzzleResult {
         int count;
     }
 }

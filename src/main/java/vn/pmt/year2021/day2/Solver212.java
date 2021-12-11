@@ -16,7 +16,7 @@ import vn.pmt.common.puzzle.Puzzle;
  * @since 11/12/2021
  */
 @Puzzle(year = 2021, day = 2)
-public class Solver212 extends AbstractPuzzleSolver<Solver212.Input212, Solver212.Result212> {
+public class Solver212 extends AbstractPuzzleSolver<Solver212.Input, Solver212.Result> {
 
     @Override
     protected int year() {
@@ -29,10 +29,10 @@ public class Solver212 extends AbstractPuzzleSolver<Solver212.Input212, Solver21
     }
 
     @Override
-    protected Input212 parseInput(List<String> rawInput) {
-        var input = new Input212();
+    protected Input parseInput(List<String> lines) {
+        var input = new Input();
         input.actions.addAll(
-            rawInput.stream()
+            lines.stream()
                 .map(in -> in.split(SPACE_DELIMITER))
                 .map(arr -> new Action(Direction.valueOf(arr[0]), Integer.parseInt(arr[1])))
                 .toList()
@@ -41,12 +41,12 @@ public class Solver212 extends AbstractPuzzleSolver<Solver212.Input212, Solver21
     }
 
     @Override
-    protected Result212 proposeSolutionPart1(Input212 parsedInput) {
-        var result = new Result212();
+    protected Result proposeSolutionPart1(Input input) {
+        var result = new Result();
         int horizontal = 0;
         int depth = 0;
 
-        for (var action : parsedInput.actions) {
+        for (var action : input.actions) {
             switch (action.direction) {
                 case forward -> horizontal += action.value;
                 case up -> depth -= action.value;
@@ -59,13 +59,13 @@ public class Solver212 extends AbstractPuzzleSolver<Solver212.Input212, Solver21
     }
 
     @Override
-    protected Result212 proposeSolutionPart2(Input212 parsedInput) {
-        var result = new Result212();
+    protected Result proposeSolutionPart2(Input input) {
+        var result = new Result();
         int horizontal = 0;
         int depth = 0;
         int aim = 0;
 
-        for (var action : parsedInput.actions) {
+        for (var action : input.actions) {
             switch (action.direction) {
                 case forward -> {
                     horizontal += action.value;
@@ -81,25 +81,25 @@ public class Solver212 extends AbstractPuzzleSolver<Solver212.Input212, Solver21
     }
 
     @Override
-    protected boolean testPart1(Result212 result) {
+    protected boolean testPart1(Result result) {
         return result.multiplication == 150;
     }
 
     @Override
-    protected boolean testPart2(Result212 result) {
+    protected boolean testPart2(Result result) {
         return result.multiplication == 900;
     }
 
     @Override
-    protected void displayResult(Result212 result) {
+    protected void displayResult(Result result) {
         System.out.println("Result: " + result.multiplication);
     }
 
-    static class Input212 implements PuzzleInput {
+    static class Input implements PuzzleInput {
         List<Action> actions = new ArrayList<>();
     }
 
-    static class Result212 implements PuzzleResult {
+    static class Result implements PuzzleResult {
         long multiplication;
     }
 

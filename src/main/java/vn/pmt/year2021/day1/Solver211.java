@@ -1,8 +1,5 @@
 package vn.pmt.year2021.day1;
 
-import static vn.pmt.year2021.day1.Solver211.DAY;
-import static vn.pmt.year2021.day1.Solver211.YEAR;
-
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,33 +12,31 @@ import vn.pmt.common.puzzle.Puzzle;
  * @author Mai Thiên Phú
  * @since 08/12/2021
  */
-@Puzzle(year = YEAR, day = DAY)
-public class Solver211 extends AbstractPuzzleSolver<Solver211.Input211, Solver211.Result211> {
-    public static final int YEAR = 2021;
-    public static final int DAY = 1;
+@Puzzle(year = 2021, day = 1)
+public class Solver211 extends AbstractPuzzleSolver<Solver211.Input, Solver211.Result> {
 
     @Override
     protected int year() {
-        return YEAR;
+        return 2021;
     }
 
     @Override
     protected int day() {
-        return DAY;
+        return 1;
     }
 
     @Override
-    protected Input211 parseInput(List<String> rawInput) {
-        var input = new Input211();
-        input.depths.addAll(rawInput.stream().map(Integer::parseInt).toList());
+    protected Input parseInput(List<String> lines) {
+        var input = new Input();
+        input.depths.addAll(lines.stream().map(Integer::parseInt).toList());
         return input;
     }
 
     @Override
-    protected Result211 proposeSolutionPart1(Input211 parsedInput) {
-        var result = new Result211();
-        for (int i = 1; i < parsedInput.depths.size(); i++) {
-            if (parsedInput.depths.get(i) > parsedInput.depths.get(i - 1)) {
+    protected Result proposeSolutionPart1(Input input) {
+        var result = new Result();
+        for (int i = 1; i < input.depths.size(); i++) {
+            if (input.depths.get(i) > input.depths.get(i - 1)) {
                 result.count++;
             }
         }
@@ -49,15 +44,15 @@ public class Solver211 extends AbstractPuzzleSolver<Solver211.Input211, Solver21
     }
 
     @Override
-    protected boolean testPart1(Result211 result) {
+    protected boolean testPart1(Result result) {
         return result.count == 7;
     }
 
     @Override
-    protected Result211 proposeSolutionPart2(Input211 parsedInput) {
-        var result = new Result211();
-        for (int i = 3; i < parsedInput.depths.size(); i++) {
-            if (parsedInput.depths.get(i) > parsedInput.depths.get(i - 3)) {
+    protected Result proposeSolutionPart2(Input input) {
+        var result = new Result();
+        for (int i = 3; i < input.depths.size(); i++) {
+            if (input.depths.get(i) > input.depths.get(i - 3)) {
                 result.count++;
             }
         }
@@ -65,20 +60,20 @@ public class Solver211 extends AbstractPuzzleSolver<Solver211.Input211, Solver21
     }
 
     @Override
-    protected boolean testPart2(Result211 result) {
+    protected boolean testPart2(Result result) {
          return result.count == 5;
     }
 
     @Override
-    protected void displayResult(Result211 result) {
+    protected void displayResult(Result result) {
         System.out.println("Result: " + result.count);
     }
 
-    static class Input211 implements PuzzleInput {
+    static class Input implements PuzzleInput {
         List<Integer> depths = new ArrayList<>();
     }
 
-    static class Result211 implements PuzzleResult {
+    static class Result implements PuzzleResult {
         int count;
     }
 }
