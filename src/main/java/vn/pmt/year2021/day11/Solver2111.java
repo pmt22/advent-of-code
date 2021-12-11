@@ -34,14 +34,14 @@ public class Solver2111 extends AbstractPuzzleSolver<Input, Result> {
     }
 
     @Override
-    protected Input parseInput(List<String> rawInput) {
+    protected Input parseInput(List<String> lines) {
         var input = new Input();
         var octopuses = new Octopus[MAX_ROW][MAX_COL];
 
-        for (int i = 0; i < rawInput.size(); i++) {
-            var arr = rawInput.get(i).split(StringUtils.EMPTY);
+        for (int i = 0; i < lines.size(); i++) {
+            var arr = lines.get(i).split(StringUtils.EMPTY);
             System.arraycopy(Arrays.stream(arr).map(str -> new Octopus(Integer.parseInt(str))).toArray(Octopus[]::new),
-                0, octopuses[i], 0, rawInput.size());
+                0, octopuses[i], 0, arr.length);
         }
         input.octopus = octopuses;
         return input;
@@ -175,19 +175,19 @@ public class Solver2111 extends AbstractPuzzleSolver<Input, Result> {
                         takeRight(col, row, octopuses);
                         takeBelowRight(col, row, octopuses);
                         takeBelow(col, row, octopuses);
-                    } else if (col == 9) {
+                    } else if (col == MAX_COL - 1) {
                         takeLeft(col, row, octopuses);
                         takeBelowLeft(col, row, octopuses);
                         takeBelow(col, row, octopuses);
                     } else {
                         takeNotAbove(col, row, octopuses);
                     }
-                } else if (row == 9) {
+                } else if (row == MAX_ROW - 1) {
                     if (col == 0) {
                         takeRight(col, row, octopuses);
                         takeAboveRight(col, row, octopuses);
                         takeAbove(col, row, octopuses);
-                    } else if (col == 9) {
+                    } else if (col == MAX_COL - 1) {
                         takeLeft(col, row, octopuses);
                         takeAboveLeft(col, row, octopuses);
                         takeAbove(col, row, octopuses);
@@ -196,7 +196,7 @@ public class Solver2111 extends AbstractPuzzleSolver<Input, Result> {
                     }
                 }  else if (col == 0) {
                     takeNotLeft(col, row, octopuses);
-                }  else if (col == 9) {
+                }  else if (col == MAX_COL - 1) {
                     takeNotRight(col, row, octopuses);
                 } else {
                     takeAround(col, row, octopuses);
