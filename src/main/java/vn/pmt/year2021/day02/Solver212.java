@@ -1,4 +1,4 @@
-package vn.pmt.year2021.day2;
+package vn.pmt.year2021.day02;
 
 import static vn.pmt.common.Constant.SPACE_DELIMITER;
 

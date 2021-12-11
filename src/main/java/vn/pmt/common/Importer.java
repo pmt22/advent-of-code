@@ -16,8 +16,8 @@ import com.google.common.reflect.ClassPath;
  * @since 10/12/2021
  */
 public class Importer {
-    private static final String TEST = "/test.txt";
-    private static final String ACTUAL = "/actual.txt";
+    private static final String TEST = "test.txt";
+    private static final String ACTUAL = "actual.txt";
 
     public List<String> importTest(int year, int day) throws Exception {
         return readAllLines(year, day, TEST);
@@ -28,7 +28,7 @@ public class Importer {
     }
 
     private List<String> readAllLines(int year, int day, String fileName) throws Exception {
-        var resourceName = "input" + "/year" + year + "/day" + day + fileName;
+        var resourceName = String.format("input/year%d/day%02d/%s", year, day, fileName);
         Optional<Path> path = ClassPath.from(ClassLoader.getSystemClassLoader())
             .getResources().stream()
             .filter(res -> StringUtils.equals(res.getResourceName(), resourceName))

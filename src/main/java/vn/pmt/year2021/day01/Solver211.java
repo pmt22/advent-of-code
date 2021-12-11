@@ -1,4 +1,4 @@
-package vn.pmt.year2021.day1;
+package vn.pmt.year2021.day01;
 
 import java.util.ArrayList;
 import java.util.List;
