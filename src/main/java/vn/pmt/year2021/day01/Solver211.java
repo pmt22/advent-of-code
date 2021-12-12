@@ -64,16 +64,16 @@ public class Solver211 extends AbstractPuzzleSolver<Solver211.Input, Solver211.R
          return result.count == 5;
     }
 
-    @Override
-    protected void displayResult(Result result) {
-        System.out.println("Result: " + result.count);
-    }
-
     static class Input implements PuzzleInput {
         List<Integer> depths = new ArrayList<>();
     }
 
     static class Result implements PuzzleResult {
         int count;
+
+        @Override
+        public String toString() {
+            return "Result: " + count;
+        }
     }
 }

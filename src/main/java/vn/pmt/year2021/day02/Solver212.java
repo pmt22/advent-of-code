@@ -90,17 +90,17 @@ public class Solver212 extends AbstractPuzzleSolver<Solver212.Input, Solver212.R
         return result.multiplication == 900;
     }
 
-    @Override
-    protected void displayResult(Result result) {
-        System.out.println("Result: " + result.multiplication);
-    }
-
     static class Input implements PuzzleInput {
         List<Action> actions = new ArrayList<>();
     }
 
     static class Result implements PuzzleResult {
         long multiplication;
+
+        @Override
+        public String toString() {
+            return "Result: " + multiplication;
+        }
     }
 
     @AllArgsConstructor

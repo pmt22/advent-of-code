@@ -51,5 +51,10 @@ public class Solver218 extends AbstractPuzzleSolver<Solver218.Input, Solver218.R
 
     static class Result implements PuzzleResult {
         int count;
+
+        @Override
+        public String toString() {
+            return "Result: " + count;
+        }
     }
 }

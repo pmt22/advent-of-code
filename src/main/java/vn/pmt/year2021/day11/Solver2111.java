@@ -86,15 +86,6 @@ public class Solver2111 extends AbstractPuzzleSolver<Solver2111.Input, Solver211
         return result.allFlashStep == 195;
     }
 
-    @Override
-    protected void displayResult(Result result) {
-        if (result.allFlashStep == 0) {
-            System.out.println("Flash times: " + result.flashedTimes);
-        } else {
-            System.out.println("All octopuses flash at step: " + result.allFlashStep);
-        }
-    }
-
     static class Input implements PuzzleInput {
         Octopus[][] octopus;
     }
@@ -103,6 +94,13 @@ public class Solver2111 extends AbstractPuzzleSolver<Solver2111.Input, Solver211
         int flashedTimes;
 
         int allFlashStep;
+
+        @Override
+        public String toString() {
+            return allFlashStep == 0
+                ? "Flash times: " + flashedTimes
+                : "All octopuses flash at step: " + allFlashStep;
+        }
     }
 
     static class Octopus {

@@ -20,7 +20,6 @@ public abstract class AbstractPuzzleSolver<I extends PuzzleInput, R extends Puzz
     protected abstract I parseInput(List<String> lines);
     protected abstract boolean testPart1(R result);
     protected abstract boolean testPart2(R result);
-    protected abstract void displayResult(R result);
 
     @Override
     public void solve() throws Exception {
@@ -70,5 +69,9 @@ public abstract class AbstractPuzzleSolver<I extends PuzzleInput, R extends Puzz
     protected R proposeSolutionPart2(I input) {
         System.err.println("Solution for part 2 is not yet implemented!");
         return null;
+    }
+
+    protected void displayResult(R result) {
+        System.out.println(result);
     }
 }

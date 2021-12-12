@@ -25,7 +25,7 @@ public class Solver213 extends AbstractPuzzleSolver<Solver213.Input, Solver213.R
     }
 
     @Override
-    protected Input parseInput(List<String> rawInput) {
+    protected Input parseInput(List<String> lines) {
         return null;
     }
 
@@ -39,16 +39,15 @@ public class Solver213 extends AbstractPuzzleSolver<Solver213.Input, Solver213.R
         return false;
     }
 
-    @Override
-    protected void displayResult(Result result) {
-        System.out.println("Result: ");
-    }
-
     static class Input implements PuzzleInput {
 
     }
 
     static class Result implements PuzzleResult {
 
+        @Override
+        public String toString() {
+            return "Result: ";
+        }
     }
 }
