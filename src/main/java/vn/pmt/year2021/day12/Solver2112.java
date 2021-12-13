@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.function.BiPredicate;
-import java.util.function.Predicate;
 import org.apache.commons.lang3.StringUtils;
 
 import lombok.EqualsAndHashCode;
@@ -22,6 +21,7 @@ import vn.pmt.common.puzzle.Puzzle;
  * @author Mai Thiên Phú
  * @since 12/12/2021
  */
+@SuppressWarnings("java:S1854")
 @Puzzle(year = 2021, day = 12)
 public class Solver2112 extends AbstractPuzzleSolver<Solver2112.Input, Solver2112.Result> {
     private static final String START = "start";
@@ -58,7 +58,6 @@ public class Solver2112 extends AbstractPuzzleSolver<Solver2112.Input, Solver211
     }
 
     @Override
-    @SuppressWarnings("java:S1854")
     protected Result proposeSolutionPart1(Input input) {
         var result = new Result();
 
