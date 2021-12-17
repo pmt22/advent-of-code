@@ -54,6 +54,7 @@ public class Solver2112 extends AbstractPuzzleSolver<Solver2112.Input, Solver211
             });
 
         input.caves.addAll(positionsMap.keySet());
+        input.caves.forEach(Cave::makeList);
         return input;
     }
 
@@ -61,7 +62,6 @@ public class Solver2112 extends AbstractPuzzleSolver<Solver2112.Input, Solver211
     protected Result proposeSolutionPart1(Input input) {
         var result = new Result();
 
-        input.caves.forEach(Cave::makeList);
         Cave start = input.caves.stream().filter(Cave::isStart).findFirst().get();
         Cave end = input.caves.stream().filter(Cave::isEnd).findFirst().get();
 
@@ -88,7 +88,7 @@ public class Solver2112 extends AbstractPuzzleSolver<Solver2112.Input, Solver211
     @Override
     protected Result proposeSolutionPart2(Input input) {
         var result = new Result();
-        input.caves.forEach(Cave::makeList);
+
         Cave start = input.caves.stream().filter(Cave::isStart).findFirst().get();
         Cave end = input.caves.stream().filter(Cave::isEnd).findFirst().get();
 
