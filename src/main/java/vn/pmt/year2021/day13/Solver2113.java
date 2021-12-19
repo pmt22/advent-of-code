@@ -5,7 +5,6 @@ import java.util.List;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.tuple.Pair;
 
-import lombok.AllArgsConstructor;
 import vn.pmt.common.PuzzleInput;
 import vn.pmt.common.PuzzleResult;
 import vn.pmt.common.puzzle.AbstractPuzzleSolver;
@@ -34,17 +33,17 @@ public class Solver2113 extends AbstractPuzzleSolver<Solver2113.Input, Solver211
 
         boolean foldPart = false;
         List<Pair<Integer, Integer>> coordinateList = new ArrayList<>();
-        for (String line : lines) {
+        for (var line : lines) {
             if (StringUtils.isBlank(line) && !foldPart) {
                 foldPart = true;
                 continue;
             }
 
             if (foldPart) {
-                String[] split = line.split("=");
+                var split = line.split("=");
                 input.actions.add(new Action(Integer.parseInt(split[1]), split[0].charAt(split[0].length() - 1)));
             } else {
-                String[] split = line.split(",");
+                var split = line.split(",");
                 var pair = Pair.of(Integer.parseInt(split[0]), Integer.parseInt(split[1]));
                 if (pair.getLeft() > input.maxX) {
                     input.maxX = pair.getLeft();
@@ -106,7 +105,7 @@ public class Solver2113 extends AbstractPuzzleSolver<Solver2113.Input, Solver211
     protected Result proposeSolutionPart2(Input input) {
         var result = new Result();
         for (int i = 0; i < input.actions.size(); i++) {
-            Action action = input.actions.get(i);
+            var action = input.actions.get(i);
             fold(input, result, action);
             if (i == input.actions.size() - 1) print(input);
         }
@@ -158,9 +157,5 @@ public class Solver2113 extends AbstractPuzzleSolver<Solver2113.Input, Solver211
         }
     }
 
-    @AllArgsConstructor
-    static class Action {
-        int foldPosition;
-        char direction;
-    }
+    static record Action(int foldPosition, char direction) {}
 }

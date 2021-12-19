@@ -79,7 +79,7 @@ public class Solver2116 extends AbstractPuzzleSolver<Solver2116.Input, Solver211
         return result;
     }
 
-    private long calculatePacket(Packet packet) {
+    long calculatePacket(Packet packet) {
         return switch ((int) packet.type) {
             case 0 -> packet.subPackets.stream().map(this::calculatePacket).reduce(0L, Long::sum);
             case 1 -> packet.subPackets.stream().map(this::calculatePacket).reduce(1L, (aLong, aLong2) -> aLong * aLong2);

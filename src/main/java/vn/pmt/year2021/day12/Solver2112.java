@@ -24,8 +24,8 @@ import vn.pmt.common.puzzle.Puzzle;
 @SuppressWarnings("java:S1854")
 @Puzzle(year = 2021, day = 12)
 public class Solver2112 extends AbstractPuzzleSolver<Solver2112.Input, Solver2112.Result> {
-    private static final String START = "start";
-    private static final String END = "end";
+    static final String START = "start";
+    static final String END = "end";
 
     @Override
     protected int year() {
@@ -45,8 +45,8 @@ public class Solver2112 extends AbstractPuzzleSolver<Solver2112.Input, Solver211
         lines.stream()
             .map(str -> str.split(Constant.HYPHEN_DELIMITER))
             .forEach(arr -> {
-                Cave firstEnd = new Cave(arr[0]);
-                Cave secondEnd = new Cave(arr[1]);
+                var firstEnd = new Cave(arr[0]);
+                var secondEnd = new Cave(arr[1]);
                 if (!positionsMap.containsKey(firstEnd)) positionsMap.put(firstEnd, firstEnd);
                 if (!positionsMap.containsKey(secondEnd)) positionsMap.put(secondEnd, secondEnd);
                 positionsMap.get(firstEnd).linkedCaveSet.add(positionsMap.get(secondEnd));
@@ -70,7 +70,7 @@ public class Solver2112 extends AbstractPuzzleSolver<Solver2112.Input, Solver211
         return result;
     }
 
-    private void count(Cave start, Cave end, Result result, Input input, BiPredicate<Input, Cave> caseSpecificPredicate) {
+    void count(Cave start, Cave end, Result result, Input input, BiPredicate<Input, Cave> caseSpecificPredicate) {
         if (start == end) {
             result.pathCount++;
         } else {
@@ -89,19 +89,19 @@ public class Solver2112 extends AbstractPuzzleSolver<Solver2112.Input, Solver211
     protected Result proposeSolutionPart2(Input input) {
         var result = new Result();
 
-        Cave start = input.caves.stream().filter(Cave::isStart).findFirst().get();
-        Cave end = input.caves.stream().filter(Cave::isEnd).findFirst().get();
+        var startCave = input.caves.stream().filter(Cave::isStart).findFirst().get();
+        var endCave = input.caves.stream().filter(Cave::isEnd).findFirst().get();
 
-        count(start, end, result, input, (in, concernedCave) -> noCaveIsPassedMoreThanOnce(input)
+        count(startCave, endCave, result, input, (in, concernedCave) -> noCaveIsPassedMoreThanOnce(input)
             || existASmallCaveIsPassedTwiceAndThatOneIsNotSameAsConcernedCaveWhichIsAlsoNotPassed(input, concernedCave));
         return result;
     }
 
-    private boolean noCaveIsPassedMoreThanOnce(Input input) {
+    boolean noCaveIsPassedMoreThanOnce(Input input) {
         return input.caves.stream().filter(Cave::isSmallCave).noneMatch(p -> p.passedCount > 1);
     }
 
-    private boolean existASmallCaveIsPassedTwiceAndThatOneIsNotSameAsConcernedCaveWhichIsAlsoNotPassed(Input input, Cave cave) {
+    boolean existASmallCaveIsPassedTwiceAndThatOneIsNotSameAsConcernedCaveWhichIsAlsoNotPassed(Input input, Cave cave) {
         return cave.passedCount < 1
             && input.caves.stream().filter(Cave::isSmallCave).anyMatch(p -> p.passedCount > 1)
             && input.caves.stream().filter(Cave::isSmallCave).filter(p -> p.passedCount > 1).findFirst().map(c -> !c.equals(cave)).orElse(false);

@@ -50,8 +50,8 @@ public class Solver2114 extends AbstractPuzzleSolver<Solver2114.Input, Solver211
 
                 input.lastChar = String.valueOf(line.charAt(line.length() - 1));
             } else {
-                String[] mainSplit = line.split(Constant.ARROW_SPACE_DELIMITER);
-                String[] firstHalf = mainSplit[0].split(StringUtils.EMPTY);
+                var mainSplit = line.split(Constant.ARROW_SPACE_DELIMITER);
+                var firstHalf = mainSplit[0].split(StringUtils.EMPTY);
 
                 input.rules.put(Pair.of(firstHalf[0], firstHalf[1]),
                     List.of(Pair.of(firstHalf[0], mainSplit[1]), Pair.of(mainSplit[1], firstHalf[1])));

@@ -16,9 +16,9 @@ import vn.pmt.common.puzzle.Puzzle;
  */
 @Puzzle(year = 2021, day = 11)
 public class Solver2111 extends AbstractPuzzleSolver<Solver2111.Input, Solver2111.Result> {
-    private static final int STEPS = 100;
-    private static final int MAX_COL = 10;
-    private static final int MAX_ROW = 10;
+    static final int STEPS = 100;
+    static final int MAX_COL = 10;
+    static final int MAX_ROW = 10;
 
     @Override
     protected int year() {
@@ -111,14 +111,14 @@ public class Solver2111 extends AbstractPuzzleSolver<Solver2111.Input, Solver211
         public Octopus(int energy) {
             this.energy = energy;
         }
-        
+
         void charge(Result result) {
             energy++;
             if (energy == 10 && !hasFlashed) {
                 flash(result);
             }
         }
-        
+
         void flash(Result result) {
             hasFlashed = true;
             result.flashedTimes++;
@@ -131,7 +131,7 @@ public class Solver2111 extends AbstractPuzzleSolver<Solver2111.Input, Solver211
         }
     }
 
-    private boolean allOctopusFlash(Octopus[][] octopuses) {
+    boolean allOctopusFlash(Octopus[][] octopuses) {
         for (int row = 0; row < MAX_ROW; row++) {
             for (int col = 0; col < MAX_COL; col++) {
                 if (octopuses[row][col].energy != 0) {
@@ -142,7 +142,7 @@ public class Solver2111 extends AbstractPuzzleSolver<Solver2111.Input, Solver211
         return true;
     }
 
-    private void charging(Octopus[][] octopuses, Result result) {
+    void charging(Octopus[][] octopuses, Result result) {
         for (int row = 0; row < MAX_ROW; row++) {
             for (int col = 0; col < MAX_COL; col++) {
                 octopuses[row][col].charge(result);
@@ -150,7 +150,7 @@ public class Solver2111 extends AbstractPuzzleSolver<Solver2111.Input, Solver211
         }
     }
 
-    private void afterStep(Octopus[][] octopuses) {
+    void afterStep(Octopus[][] octopuses) {
         for (int row = 0; row < MAX_ROW; row++) {
             for (int col = 0; col < MAX_COL; col++) {
                 Octopus octopus = octopuses[row][col];
@@ -162,7 +162,7 @@ public class Solver2111 extends AbstractPuzzleSolver<Solver2111.Input, Solver211
         }
     }
 
-    private void findAdjacent(Octopus[][] octopuses) {
+    void findAdjacent(Octopus[][] octopuses) {
         for (int row = 0; row < MAX_ROW; row++) {
             for (int col = 0; col < MAX_COL; col++) {
                 if (row == 0) {
@@ -189,9 +189,9 @@ public class Solver2111 extends AbstractPuzzleSolver<Solver2111.Input, Solver211
                     } else {
                         takeNotBelow(col, row, octopuses);
                     }
-                }  else if (col == 0) {
+                } else if (col == 0) {
                     takeNotLeft(col, row, octopuses);
-                }  else if (col == MAX_COL - 1) {
+                } else if (col == MAX_COL - 1) {
                     takeNotRight(col, row, octopuses);
                 } else {
                     takeAround(col, row, octopuses);
@@ -200,7 +200,7 @@ public class Solver2111 extends AbstractPuzzleSolver<Solver2111.Input, Solver211
         }
     }
 
-    private void takeAround(int col, int row, Octopus[][] octopuses) {
+    void takeAround(int col, int row, Octopus[][] octopuses) {
         takeRight(col, row, octopuses);
         takeLeft(col, row, octopuses);
         takeAbove(col, row, octopuses);
@@ -212,7 +212,7 @@ public class Solver2111 extends AbstractPuzzleSolver<Solver2111.Input, Solver211
         takeBelowLeft(col, row, octopuses);
     }
 
-    private void takeNotAbove(int col, int row, Octopus[][] octopuses) {
+    void takeNotAbove(int col, int row, Octopus[][] octopuses) {
         takeRight(col, row, octopuses);
         takeLeft(col, row, octopuses);
         takeBelow(col, row, octopuses);
@@ -220,7 +220,7 @@ public class Solver2111 extends AbstractPuzzleSolver<Solver2111.Input, Solver211
         takeBelowLeft(col, row, octopuses);
     }
 
-    private void takeNotBelow(int col, int row, Octopus[][] octopuses) {
+    void takeNotBelow(int col, int row, Octopus[][] octopuses) {
         takeRight(col, row, octopuses);
         takeLeft(col, row, octopuses);
         takeAbove(col, row, octopuses);
@@ -228,7 +228,7 @@ public class Solver2111 extends AbstractPuzzleSolver<Solver2111.Input, Solver211
         takeAboveLeft(col, row, octopuses);
     }
 
-    private void takeNotLeft(int col, int row, Octopus[][] octopuses) {
+    void takeNotLeft(int col, int row, Octopus[][] octopuses) {
         takeRight(col, row, octopuses);
         takeAbove(col, row, octopuses);
         takeBelow(col, row, octopuses);
@@ -236,7 +236,7 @@ public class Solver2111 extends AbstractPuzzleSolver<Solver2111.Input, Solver211
         takeBelowRight(col, row, octopuses);
     }
 
-    private void takeNotRight(int col, int row, Octopus[][] octopuses) {
+    void takeNotRight(int col, int row, Octopus[][] octopuses) {
         takeLeft(col, row, octopuses);
         takeAbove(col, row, octopuses);
         takeBelow(col, row, octopuses);
@@ -244,35 +244,35 @@ public class Solver2111 extends AbstractPuzzleSolver<Solver2111.Input, Solver211
         takeBelowLeft(col, row, octopuses);
     }
 
-    private void takeRight(int col, int row, Octopus[][] octopuses) {
+    void takeRight(int col, int row, Octopus[][] octopuses) {
         octopuses[row][col].adjacentOctopuses.add(octopuses[row][col + 1]);
     }
 
-    private void takeLeft(int col, int row, Octopus[][] octopuses) {
+    void takeLeft(int col, int row, Octopus[][] octopuses) {
         octopuses[row][col].adjacentOctopuses.add(octopuses[row][col - 1]);
     }
 
-    private void takeBelow(int col, int row, Octopus[][] octopuses) {
+    void takeBelow(int col, int row, Octopus[][] octopuses) {
         octopuses[row][col].adjacentOctopuses.add(octopuses[row + 1][col]);
     }
 
-    private void takeAbove(int col, int row, Octopus[][] octopuses) {
+    void takeAbove(int col, int row, Octopus[][] octopuses) {
         octopuses[row][col].adjacentOctopuses.add(octopuses[row - 1][col]);
     }
 
-    private void takeAboveRight(int col, int row, Octopus[][] octopuses) {
+    void takeAboveRight(int col, int row, Octopus[][] octopuses) {
         octopuses[row][col].adjacentOctopuses.add(octopuses[row - 1][col + 1]);
     }
 
-    private void takeAboveLeft(int col, int row, Octopus[][] octopuses) {
+    void takeAboveLeft(int col, int row, Octopus[][] octopuses) {
         octopuses[row][col].adjacentOctopuses.add(octopuses[row - 1][col - 1]);
     }
 
-    private void takeBelowRight(int col, int row, Octopus[][] octopuses) {
+    void takeBelowRight(int col, int row, Octopus[][] octopuses) {
         octopuses[row][col].adjacentOctopuses.add(octopuses[row + 1][col + 1]);
     }
 
-    private void takeBelowLeft(int col, int row, Octopus[][] octopuses) {
+    void takeBelowLeft(int col, int row, Octopus[][] octopuses) {
         octopuses[row][col].adjacentOctopuses.add(octopuses[row + 1][col - 1]);
     }
 }

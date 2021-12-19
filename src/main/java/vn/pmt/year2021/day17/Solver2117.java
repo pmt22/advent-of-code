@@ -33,10 +33,10 @@ public class Solver2117 extends AbstractPuzzleSolver<Solver2117.Input, Solver211
     @Override
     protected Input parseInput(List<String> lines) {
         var input = new Input();
-        Pattern xPattern = Pattern.compile("x=(-*\\d+)..(-*\\d+)");
-        Pattern yPattern = Pattern.compile("y=(-*\\d+)..(-*\\d+)");
-        String in = lines.get(0);
-        Matcher matcher = xPattern.matcher(in);
+        var xPattern = Pattern.compile("x=(-*\\d+)..(-*\\d+)");
+        var yPattern = Pattern.compile("y=(-*\\d+)..(-*\\d+)");
+        var in = lines.get(0);
+        var matcher = xPattern.matcher(in);
         if (matcher.find()) {
             input.targetXFrom = Integer.parseInt(matcher.group(1));
             input.targetXTo = Integer.parseInt(matcher.group(2));

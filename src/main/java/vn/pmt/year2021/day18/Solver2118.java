@@ -1,7 +1,6 @@
 package vn.pmt.year2021.day18;
 
 import java.util.ArrayDeque;
-import java.util.Deque;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -64,7 +63,7 @@ public class Solver2118 extends AbstractPuzzleSolver<Solver2118.Input, Solver211
             StringBuilder number = doSnailfishNumberAddition(left, right);
             left = number.toString();
         }
-        SnailfishNumber resultNumber = Number.parseSnailfishNumber(left);
+        var resultNumber = Number.parseSnailfishNumber(left);
         result.magnitude = magnitude(resultNumber);
         return result;
     }
@@ -77,8 +76,8 @@ public class Solver2118 extends AbstractPuzzleSolver<Solver2118.Input, Solver211
                 String left = input.lines.get(j);
                 String right = input.lines.get(i);
                 StringBuilder number = doSnailfishNumberAddition(left, right);
-                SnailfishNumber resultNumber = Number.parseSnailfishNumber(number.toString());
-                long magnitude = magnitude(resultNumber);
+                var resultNumber = Number.parseSnailfishNumber(number.toString());
+                var magnitude = magnitude(resultNumber);
                 if (result.magnitude < magnitude) result.magnitude = magnitude;
             }
         }
@@ -87,13 +86,9 @@ public class Solver2118 extends AbstractPuzzleSolver<Solver2118.Input, Solver211
 
     StringBuilder doSnailfishNumberAddition(String left, String right) {
         StringBuilder number = new StringBuilder();
-        number.append('[')
-            .append(left)
-            .append(',')
-            .append(right)
-            .append(']');
+        number.append('[').append(left).append(',').append(right).append(']');
 
-        boolean notYetReduced = true;
+        var notYetReduced = true;
         while (notYetReduced) {
             explode(number);
             notYetReduced = split(number);
@@ -157,10 +152,10 @@ public class Solver2118 extends AbstractPuzzleSolver<Solver2118.Input, Solver211
     void explode(StringBuilder number) {
         Pair<Integer, Integer> explodeIndexes;
         while ((explodeIndexes = findExplodable(number)) != null) {
-            String explodingBlock = number.substring(explodeIndexes.getLeft(), explodeIndexes.getRight() + 1);
-            SnailfishNumber explodeNumber = Number.parseOneSimpleSnailfishNumber(explodingBlock);
-            Triple<Integer, Integer, Integer> leftRegularNumber = findLeftRegularNumber(explodeIndexes.getLeft(), number);
-            Triple<Integer, Integer, Integer> rightRegularNumber = findRightRegularNumber(explodeIndexes.getRight(), number);
+            var explodingBlock = number.substring(explodeIndexes.getLeft(), explodeIndexes.getRight() + 1);
+            var explodeNumber = Number.parseOneSimpleSnailfishNumber(explodingBlock);
+            var leftRegularNumber = findLeftRegularNumber(explodeIndexes.getLeft(), number);
+            var rightRegularNumber = findRightRegularNumber(explodeIndexes.getRight(), number);
 
             number.replace(explodeIndexes.getLeft(), explodeIndexes.getRight() + 1, "0");
             int lengthChange = number.length();
@@ -188,12 +183,12 @@ public class Solver2118 extends AbstractPuzzleSolver<Solver2118.Input, Solver211
      * @return Pair.of(fromIndex, toIndex)
      */
     Pair<Integer, Integer> findExplodable(StringBuilder number) {
-        Deque<Character> symbolDeque = new ArrayDeque<>();
+        var symbolDeque = new ArrayDeque<Character>();
         int explodeIndexFrom = -1;
         int explodeIndexTo = -1;
 
         for (int i = 0; i < number.length(); i++) {
-            char c = number.charAt(i);
+            var c = number.charAt(i);
             if (c == '[') {
                 symbolDeque.push(c);
                 if (symbolDeque.size() == 5) {
@@ -221,7 +216,7 @@ public class Solver2118 extends AbstractPuzzleSolver<Solver2118.Input, Solver211
      */
     static Triple<Integer, Integer, Integer> findLeftRegularNumber(int explodeIndex, StringBuilder number) {
         boolean found = false;
-        StringBuilder returned = new StringBuilder();
+        var returned = new StringBuilder();
         for (int i = explodeIndex; i >= 0; i--) {
             char c = number.charAt(i);
             if (REGULAR_NUMBER_MAP.containsKey(c)) {
@@ -242,9 +237,9 @@ public class Solver2118 extends AbstractPuzzleSolver<Solver2118.Input, Solver211
 
     static Triple<Integer, Integer, Integer> findRightRegularNumber(int explodeIndex, StringBuilder number) {
         boolean found = false;
-        StringBuilder returned = new StringBuilder();
+        var returned = new StringBuilder();
         for (int i = explodeIndex; i < number.length(); i++) {
-            char c = number.charAt(i);
+            var c = number.charAt(i);
             if (REGULAR_NUMBER_MAP.containsKey(c)) {
                 returned.append(c);
                 found = true;

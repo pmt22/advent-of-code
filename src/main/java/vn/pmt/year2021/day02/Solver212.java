@@ -5,7 +5,6 @@ import static vn.pmt.common.Constant.SPACE_DELIMITER;
 import java.util.ArrayList;
 import java.util.List;
 
-import lombok.AllArgsConstructor;
 import vn.pmt.common.PuzzleInput;
 import vn.pmt.common.PuzzleResult;
 import vn.pmt.common.puzzle.AbstractPuzzleSolver;
@@ -103,10 +102,7 @@ public class Solver212 extends AbstractPuzzleSolver<Solver212.Input, Solver212.R
         }
     }
 
-    @AllArgsConstructor
-    static class Action {
-        Direction direction;
-        int value;
+    static record Action(Direction direction, int value) {
     }
 
     enum Direction {
