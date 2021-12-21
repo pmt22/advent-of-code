@@ -44,19 +44,25 @@ public class Solver2120 extends AbstractPuzzleSolver<Solver2120.Input, Solver212
         return result;
     }
 
-    private void solve(Input input, Result result, int steps) {
+    void solve(Input input, Result result, int steps) {
         char[][] outputImage;
         char[][] tempOutputImage;
-        for (int i = 1; i <= steps; i++) {
+
+        boolean firstCharInAlgorithmIsDark = input.enhanceAlgorithm[0] == '.';
+        for (int step = 1; step <= steps; step++) {
             int additionalTempOutSize = 4;
             int additionalOutSize = 2;
             tempOutputImage = new char[(input.lineSize + additionalTempOutSize)][(input.lineSize + additionalTempOutSize)];
             outputImage = new char[(input.lineSize + additionalOutSize)][(input.lineSize + additionalOutSize)];
 
-            if (i % 2 == 1) {
+            if (firstCharInAlgorithmIsDark || step == 1) {
                 fillArray(tempOutputImage);
+            } else if (step % 2 == 0) {
+                //here every other pixel is already "enhanced" by enhanceAlgorithm[0] so we fill it with 511 which is "#########"
+                fillArray(tempOutputImage, buildEnhanceCharFromIndex(input.enhanceAlgorithm, 511));
             } else {
-                fillArray(tempOutputImage, input.enhanceAlgorithm[0]);
+                //here every other pixel is already "enhanced" by enhanceAlgorithm[511] so we fill it with 511 which is "........."
+                fillArray(tempOutputImage, buildEnhanceCharFromIndex(input.enhanceAlgorithm, 0));
             }
             fillArray(outputImage);
 
@@ -80,7 +86,21 @@ public class Solver2120 extends AbstractPuzzleSolver<Solver2120.Input, Solver212
         count(input, result);
     }
 
-    private void count(Input input, Result result) {
+    char buildEnhanceCharFromIndex(char[] enhanceAlgorithm, int index) {
+        return fromEnhancedAlgorithm(enhanceAlgorithm,
+            new StringBuilder()
+            .append(convert(enhanceAlgorithm[index]))
+            .append(convert(enhanceAlgorithm[index]))
+            .append(convert(enhanceAlgorithm[index]))
+            .append(convert(enhanceAlgorithm[index]))
+            .append(convert(enhanceAlgorithm[index]))
+            .append(convert(enhanceAlgorithm[index]))
+            .append(convert(enhanceAlgorithm[index]))
+            .append(convert(enhanceAlgorithm[index]))
+            .append(convert(enhanceAlgorithm[index])));
+    }
+
+    void count(Input input, Result result) {
         for (int r = 0; r < input.inputImage.length; r++) {
             for (int c = 0; c < input.inputImage[0].length; c++) {
                 if (input.inputImage[r][c] == '#') result.litCount++;
@@ -88,7 +108,7 @@ public class Solver2120 extends AbstractPuzzleSolver<Solver2120.Input, Solver212
         }
     }
 
-    private char evaluate(int row, int col, char[][] input, char[] enhanceAlgorithm) {
+    char evaluate(int row, int col, char[][] input, char[] enhanceAlgorithm) {
         StringBuilder sb = new StringBuilder();
         sb
             .append(convert(input[row - 1][col - 1]))
@@ -101,15 +121,20 @@ public class Solver2120 extends AbstractPuzzleSolver<Solver2120.Input, Solver212
             .append(convert(input[row + 1][col]))
             .append(convert(input[row + 1][col + 1]));
 
+        return fromEnhancedAlgorithm(enhanceAlgorithm, sb);
+    }
+
+    char fromEnhancedAlgorithm(char[] enhanceAlgorithm, StringBuilder sb) {
         int index = Integer.parseInt(sb.toString(), 2);
         return enhanceAlgorithm[index];
     }
+
 
     int convert(char c) {
         return c == '#' ? 1 : 0;
     }
 
-    private void fillArray(char[][] array, char enhanceAlgorithmIndex0) {
+    void fillArray(char[][] array, char enhanceAlgorithmIndex0) {
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[0].length; j++) {
                 array[i][j] = enhanceAlgorithmIndex0;
@@ -117,7 +142,7 @@ public class Solver2120 extends AbstractPuzzleSolver<Solver2120.Input, Solver212
         }
     }
 
-    private void fillArray(char[][] array) {
+    void fillArray(char[][] array) {
         for (int i = 0; i < array.length; i++) {
             for (int j = 0; j < array[0].length; j++) {
                 array[i][j] = '.';
