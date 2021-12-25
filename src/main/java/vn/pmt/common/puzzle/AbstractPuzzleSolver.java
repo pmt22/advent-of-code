@@ -38,10 +38,9 @@ public abstract class AbstractPuzzleSolver<I extends PuzzleInput, R extends Puzz
         importResources();
 
         stopWatch.start();
-        if (CollectionUtils.isNotEmpty(rawTestInput)) {
+        needTest = CollectionUtils.isNotEmpty(rawTestInput);
+        if (needTest) {
             parsedTestInput = parseInput(rawTestInput);
-        } else {
-            needTest = false;
         }
         parsedActualInput = parseInput(rawActualInput);
         stopWatch.stop();
