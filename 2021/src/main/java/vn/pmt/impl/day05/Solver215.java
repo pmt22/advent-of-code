@@ -86,7 +86,7 @@ public class Solver215 extends AbstractPuzzleSolver<Solver215.Input, Solver215.R
                 for (int y = Math.min(vent.y1, vent.y2); y <= Math.max(vent.y1, vent.y2); y++) {
                     map.merge(Pair.of(vent.x1, y), 1, Integer::sum);
                 }
-            } else if (vent.hassXYIncreasing()) {
+            } else if (vent.hasXYIncreasing()) {
                 for (int x = Math.min(vent.x1, vent.x2), y = Math.min(vent.y1, vent.y2);
                      x <= Math.max(vent.x1, vent.x2);
                      x++, y++) {
@@ -144,7 +144,7 @@ public class Solver215 extends AbstractPuzzleSolver<Solver215.Input, Solver215.R
             return x1 == x2;
         }
 
-        boolean hassXYIncreasing() {
+        boolean hasXYIncreasing() {
             return (x1 > x2 && y1 > y2) || (x2 > x1 && y2 > y1);
         }
 
