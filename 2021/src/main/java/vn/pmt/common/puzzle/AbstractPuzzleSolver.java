@@ -3,8 +3,10 @@ package vn.pmt.common.puzzle;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.StopWatch;
 
+import vn.pmt.common.Constant;
 import vn.pmt.common.Importer;
 import vn.pmt.common.PuzzleInput;
 import vn.pmt.common.PuzzleResult;
@@ -37,11 +39,7 @@ public abstract class AbstractPuzzleSolver<I extends PuzzleInput, R extends Puzz
     public void solve() throws Exception {
         importResources();
 
-        stopWatch.start();
-        parsing();
-        stopWatch.stop();
-        System.out.println("Parsing input execution time: " + stopWatch.getTime(TimeUnit.MILLISECONDS) + " ms");
-        stopWatch.reset();
+        timing(this::parsing, "Parsing input execution time:");
 
         part1();
 
@@ -53,6 +51,14 @@ public abstract class AbstractPuzzleSolver<I extends PuzzleInput, R extends Puzz
     private void importResources() throws Exception {
         rawTestInput = importer.importTest(year(), day());
         rawActualInput = importer.importActual(year(), day());
+    }
+
+    private void timing(Runnable task, String title) {
+        stopWatch.start();
+        task.run();
+        stopWatch.stop();
+        System.out.println(StringUtils.joinWith(Constant.SPACE_DELIMITER, title, stopWatch.getTime(TimeUnit.MILLISECONDS), Constant.MILLISECONDS));
+        stopWatch.reset();
     }
 
     private void parsing() {
@@ -72,15 +78,11 @@ public abstract class AbstractPuzzleSolver<I extends PuzzleInput, R extends Puzz
             displayResult(testResult);
         }
         if (testPart1(testResult)) {
-            stopWatch.start();
-
-            R result = proposeSolutionPart1(parsedActualInput);
-            System.out.print("Actual: ");
-            displayResult(result);
-
-            stopWatch.stop();
-            System.out.println("Part 1 execution time: " + stopWatch.getTime(TimeUnit.MILLISECONDS) + " ms");
-            stopWatch.reset();
+            timing(() -> {
+                R result = proposeSolutionPart1(parsedActualInput);
+                System.out.print("Actual: ");
+                displayResult(result);
+            }, "Part 1 execution time:");
         }
     }
 
@@ -93,15 +95,11 @@ public abstract class AbstractPuzzleSolver<I extends PuzzleInput, R extends Puzz
             displayResult(testResult);
         }
         if (testPart2(testResult)) {
-            stopWatch.start();
-
-            R result = proposeSolutionPart2(parsedActualInput);
-            System.out.print("Actual: ");
-            displayResult(result);
-
-            stopWatch.stop();
-            System.out.println("Part 2 execution time: " + stopWatch.getTime(TimeUnit.MILLISECONDS) + " ms");
-            stopWatch.reset();
+            timing(() -> {
+                R result = proposeSolutionPart2(parsedActualInput);
+                System.out.print("Actual: ");
+                displayResult(result);
+            }, "Part 2 execution time:");
         }
     }
 

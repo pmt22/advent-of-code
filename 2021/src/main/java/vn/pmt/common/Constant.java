@@ -10,4 +10,5 @@ public class Constant {
     public static final String HYPHEN_DELIMITER = "-";
     public static final String ARROW_SPACE_DELIMITER = " -> ";
     public static final String COMMA_DELIMITER = ",";
+    public static final String MILLISECONDS = "ms";
 }
