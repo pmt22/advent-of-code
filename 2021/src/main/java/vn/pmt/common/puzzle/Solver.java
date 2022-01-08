@@ -7,4 +7,6 @@ package vn.pmt.common.puzzle;
 public interface Solver {
 
     void solve() throws Exception;
+
+    void needTest(Boolean needTest);
 }

@@ -3,6 +3,7 @@ package vn.pmt.common.puzzle;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 import org.apache.commons.collections4.CollectionUtils;
+import org.apache.commons.lang3.BooleanUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.time.StopWatch;
 
@@ -62,7 +63,7 @@ public abstract class AbstractPuzzleSolver<I extends PuzzleInput, R extends Puzz
     }
 
     private void parsing() {
-        needTest = CollectionUtils.isNotEmpty(rawTestInput);
+        needTest &= CollectionUtils.isNotEmpty(rawTestInput);
         if (needTest) {
             parsedTestInput = parseInput(rawTestInput);
         }
@@ -77,7 +78,7 @@ public abstract class AbstractPuzzleSolver<I extends PuzzleInput, R extends Puzz
             System.out.print("Test: ");
             displayResult(testResult);
         }
-        if (testPart1(testResult)) {
+        if (!needTest || testPart1(testResult)) {
             timing(() -> {
                 R result = proposeSolutionPart1(parsedActualInput);
                 System.out.print("Actual: ");
@@ -94,7 +95,7 @@ public abstract class AbstractPuzzleSolver<I extends PuzzleInput, R extends Puzz
             System.out.print("Test: ");
             displayResult(testResult);
         }
-        if (testPart2(testResult)) {
+        if (!needTest || testPart2(testResult)) {
             timing(() -> {
                 R result = proposeSolutionPart2(parsedActualInput);
                 System.out.print("Actual: ");
@@ -115,5 +116,10 @@ public abstract class AbstractPuzzleSolver<I extends PuzzleInput, R extends Puzz
 
     protected void displayResult(R result) {
         System.out.println(result);
+    }
+
+    @Override
+    public void needTest(Boolean needTest) {
+        this.needTest = BooleanUtils.isNotFalse(needTest);
     }
 }
